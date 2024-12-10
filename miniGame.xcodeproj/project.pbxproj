@@ -6,30 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CEF165A82D089240000A1984 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF1659E2D089240000A1984 /* AppDelegate.swift */; };
+		CEF165A92D089240000A1984 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF165A52D089240000A1984 /* SceneDelegate.swift */; };
+		CEF165AA2D089240000A1984 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF165A62D089240000A1984 /* ViewController.swift */; };
+		CEF165AB2D089240000A1984 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF1659F2D089240000A1984 /* Assets.xcassets */; };
+		CEF165B02D089372000A1984 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF165AF2D089372000A1984 /* Button.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CEF165862D089235000A1984 /* miniGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEF1659E2D089240000A1984 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CEF1659F2D089240000A1984 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEF165A02D089240000A1984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEF165A52D089240000A1984 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CEF165A62D089240000A1984 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CEF165AF2D089372000A1984 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CEF165982D089239000A1984 /* Exceptions for "miniGame" folder in "miniGame" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = CEF165852D089235000A1984 /* miniGame */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		CEF165882D089235000A1984 /* miniGame */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				CEF165982D089239000A1984 /* Exceptions for "miniGame" folder in "miniGame" target */,
-			);
-			path = miniGame;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CEF165832D089235000A1984 /* Frameworks */ = {
@@ -45,7 +38,7 @@
 		CEF1657D2D089235000A1984 = {
 			isa = PBXGroup;
 			children = (
-				CEF165882D089235000A1984 /* miniGame */,
+				CEF165A72D089240000A1984 /* miniGame */,
 				CEF165872D089235000A1984 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +49,19 @@
 				CEF165862D089235000A1984 /* miniGame.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CEF165A72D089240000A1984 /* miniGame */ = {
+			isa = PBXGroup;
+			children = (
+				CEF1659E2D089240000A1984 /* AppDelegate.swift */,
+				CEF1659F2D089240000A1984 /* Assets.xcassets */,
+				CEF165A02D089240000A1984 /* Info.plist */,
+				CEF165A52D089240000A1984 /* SceneDelegate.swift */,
+				CEF165A62D089240000A1984 /* ViewController.swift */,
+				CEF165AF2D089372000A1984 /* Button.swift */,
+			);
+			path = miniGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,9 +78,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				CEF165882D089235000A1984 /* miniGame */,
 			);
 			name = miniGame;
 			packageProductDependencies = (
@@ -122,6 +125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF165AB2D089240000A1984 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +136,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF165A82D089240000A1984 /* AppDelegate.swift in Sources */,
+				CEF165A92D089240000A1984 /* SceneDelegate.swift in Sources */,
+				CEF165AA2D089240000A1984 /* ViewController.swift in Sources */,
+				CEF165B02D089372000A1984 /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +158,6 @@
 				INFOPLIST_FILE = miniGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -160,9 +167,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = halushko.miniGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -178,7 +189,6 @@
 				INFOPLIST_FILE = miniGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -188,9 +198,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = halushko.miniGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
