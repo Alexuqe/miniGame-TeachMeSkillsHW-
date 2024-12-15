@@ -1,54 +1,58 @@
-//
-//  ViewController.swift
-//  miniGame
-//
-//  Created by Sasha on 10.12.24.
-//
+    //
+    //  ViewController.swift
+    //  miniGame
+    //
+    //  Created by Sasha on 10.12.24.
+    //
 
 import UIKit
 
-class ViewController: UIViewController {
+enum Moving {
+    case left
+    case right
+    case up
+    case down
+}
 
-    let squareSize: CGFloat = 45
+final class ViewController: UIViewController {
 
-    let upButton = Button()
-    let downButton = Button()
-    let leftButton = Button()
-    let rightButton = Button()
+    //MARK: UI
+    private let upButton = Button()
+    private let downButton = Button()
+    private let leftButton = Button()
+    private let rightButton = Button()
 
-    let safeViewSquare: UIView = {
+    private let safeViewSquare = UIView()
+    private let buttonArea: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 30
-        return view
-    }()
-
-    let buttonArea: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    let squareView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    private let squareView = UIView()
 
+    //MARK: Properties
+    private let squareSize: CGFloat = 40
+
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
 
+        swipeMove(.left)
+        swipeMove(.right)
+        swipeMove(.up)
+        swipeMove(.down)
     }
+}
 
+//MARK: Extension ViewController
+private extension ViewController {
+
+//MARK: Configure UI
     func configureUI() {
 
-        view.addSubview(safeViewSquare)
-        constraintsSafeView()
+        configureSafeArea()
 
         view.addSubview(buttonArea)
         constraintsButtonAreaView()
@@ -56,8 +60,25 @@ class ViewController: UIViewController {
         configureButtons()
         constraintsButtons()
 
-        safeViewSquare.addSubview(squareView)
-        configureSquareConstraints()
+        configureSquare()
+    }
+
+    func configureSafeArea() {
+        safeViewSquare.translatesAutoresizingMaskIntoConstraints = false
+        safeViewSquare.layer.cornerRadius = 30
+        safeViewSquare.backgroundColor = .systemGray6
+
+        view.addSubview(safeViewSquare)
+        constraintsSafeView()
+    }
+
+    func configureSquare() {
+        squareView.backgroundColor = .blue
+        squareView.translatesAutoresizingMaskIntoConstraints = false
+        squareView.layer.cornerRadius = squareSize / 2
+
+        view.addSubview(squareView)
+        constraintsSquare()
     }
 
     func configureButtons() {
@@ -82,41 +103,145 @@ class ViewController: UIViewController {
         rightButton.addTarget(self, action: #selector(movingSquare), for: .touchUpInside)
     }
 
-    @objc func movingSquare(_ sender: UIButton) {
-        let safeAreaWight = safeViewSquare.bounds.width
-        let safeAreaHeight = safeViewSquare.bounds.height
 
-        var newX = squareView.frame.origin.x
-        var newY = squareView.frame.origin.y
+//MARK: Configure Actions
+    func move(_ move: Moving) {
 
-        switch sender.tag {
-            case 0: newY -= squareSize // up
-            case 1: newY += squareSize // down
-            case 2: newX -= squareSize // left
-            default: newX += squareSize // right
+        switch move {
+            case .left:
+                if squareView.frame.origin.x > safeViewSquare.frame.origin.x + squareSize {
+                    squareView.frame.origin.x -= squareSize
+                }
+            case .right:
+                if squareView.frame.maxX < safeViewSquare.frame.width - squareSize {
+                    squareView.frame.origin.x += squareSize
+                }
+            case .up:
+                if squareView.frame.origin.y > safeViewSquare.frame.origin.y + squareSize  {
+                    squareView.frame.origin.y -= squareSize
+                }
+            case .down:
+                if squareView.frame.maxY < safeViewSquare.frame.height + squareSize {
+                    squareView.frame.origin.y += squareSize
+                }
         }
 
-        if newX >= 0 && newX <= safeAreaWight - squareSize && newY >= 0 && newY <= safeAreaHeight - squareSize {
-                    squareView.frame.origin.x = newX
-                    squareView.frame.origin.y = newY
-                }
     }
 
+    func swipeMove(_ move: Moving) {
+        switch move {
+            case .left:
+                swipeCirleOnLeft()
+            case .right:
+                swipeCirleOnRight()
+            case .up:
+                swipeCirleOnUP()
+            case .down:
+                swipeCirleOnDown()
+        }
+    }
+
+    func swipeCirleOnLeft() {
+        let leftSwipeRecognaizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(swipeLeft)
+        )
+
+        leftSwipeRecognaizer.direction = .left
+        self.squareView.addGestureRecognizer(leftSwipeRecognaizer)
+    }
+
+    func swipeCirleOnRight() {
+        let rightSwipeRecognaizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(swipeRight)
+        )
+
+        rightSwipeRecognaizer.direction = .right
+        self.squareView.addGestureRecognizer(rightSwipeRecognaizer)
+    }
+
+    func swipeCirleOnUP() {
+        let upSwipeRecognaizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(swipeUP)
+        )
+
+        upSwipeRecognaizer.direction = .up
+        self.squareView.addGestureRecognizer(upSwipeRecognaizer)
+    }
+
+    func swipeCirleOnDown() {
+        let downSwipeRecognaizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(swipeDown)
+        )
+
+        downSwipeRecognaizer.direction = .down
+        self.squareView.addGestureRecognizer(downSwipeRecognaizer)
+    }
+
+
+//MARK: Actions
+    @objc func movingSquare(_ sender: UIButton) {
+
+        switch sender.tag {
+            case 0: move(.up)  // up
+            case 1: move(.down)  // down
+            case 2: move(.left)  // left
+            default: move(.right)  // right
+        }
+    }
+
+    @objc func swipeLeft() {
+        if squareView.frame.origin.x > safeViewSquare.frame.origin.x + squareSize {
+            squareView.frame.origin.x = safeViewSquare.frame.origin.x
+        }
+    }
+
+    @objc func swipeRight() {
+        if squareView.frame.maxX < safeViewSquare.frame.width {
+            squareView.frame.origin.x = safeViewSquare.frame.width
+        }
+    }
+
+    @objc func swipeUP() {
+        if squareView.frame.origin.y > safeViewSquare.frame.origin.y + squareSize  {
+            squareView.frame.origin.y = safeViewSquare.frame.origin.y
+        }
+    }
+
+    @objc func swipeDown() {
+        if squareView.frame.maxY < safeViewSquare.frame.height + squareSize {
+            squareView.frame.origin.y = safeViewSquare.frame.height + squareSize
+        }
+    }
+
+
+//MARK: Constraints
     func constraintsSafeView() {
         NSLayoutConstraint.activate([
-            safeViewSquare.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            safeViewSquare.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            safeViewSquare.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            safeViewSquare.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -300)
+            safeViewSquare.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            safeViewSquare.topAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            safeViewSquare.leadingAnchor
+                .constraint(equalTo: view.leadingAnchor, constant: 30),
+            safeViewSquare.trailingAnchor
+                .constraint(equalTo: view.trailingAnchor, constant: -30),
+            safeViewSquare.heightAnchor.constraint(equalToConstant: 450),
         ])
     }
 
     func constraintsButtonAreaView() {
         NSLayoutConstraint.activate([
-            buttonArea.topAnchor.constraint(equalTo: safeViewSquare.bottomAnchor, constant: 30),
-            buttonArea.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            buttonArea.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            buttonArea.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
+            buttonArea.topAnchor.constraint(
+                equalTo: safeViewSquare.bottomAnchor, constant: 30),
+            buttonArea.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor, constant: 40),
+            buttonArea.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor, constant: -40),
+            buttonArea.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
         ])
     }
 
@@ -133,7 +258,7 @@ class ViewController: UIViewController {
         ])
     }
 
-    func configureSquareConstraints() {
+    func constraintsSquare() {
         NSLayoutConstraint.activate([
             squareView.centerXAnchor.constraint(equalTo: safeViewSquare.centerXAnchor),
             squareView.centerYAnchor.constraint(equalTo: safeViewSquare.centerYAnchor),
